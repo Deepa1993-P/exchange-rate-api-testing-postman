@@ -1,0 +1,1921 @@
+{
+  "info": {
+    "_postman_id": "9b43a021-3bea-42a4-ba9e-9ba7a4e7bb8f",
+    "name": "Banking Forex Exchange API Testing",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56161681"
+  },
+  "item": [
+    {
+      "name": "Latest Exchange Rates",
+      "item": [
+        {
+          "name": "Fetch the exchange rates.",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Verify status code\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "// Verify array is not empty\r",
+                  "let response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Response should not be empty\", function(){\r",
+                  "    pm.expect(response.length).to.be.above(0);\r",
+                  "});\r",
+                  "// Verify required fields exist\r",
+                  "const jsonData=pm.response.json()[0];\r",
+                  "pm.test(\"Currency fields should exist\", function () {\r",
+                  "    pm.expect(jsonData).to.have.property(\"base\");\r",
+                  "    pm.expect(jsonData).to.have.property(\"quote\");\r",
+                  "    pm.expect(jsonData).to.have.property(\"rate\");\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Base Currency",
+      "item": [
+        {
+          "name": "Change the base currency",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Change base currency to USD",
+                  "let response = pm.response.json();",
+                  "pm.test(\"Base currency should be USD\", function () {",
+                  "    pm.expect(response[0].base).to.eql(\"USD\");",
+                  "});",
+                  "",
+                  "//Verify the JSON Schema",
+                  "const Ajv = require('ajv');",
+                  "const ajv = new Ajv({ allErrors: true });",
+                  "",
+                  "const schema = {",
+                  "  \"type\": \"array\",",
+                  "  \"description\": \"\",",
+                  "  \"minItems\": 1,",
+                  "  \"uniqueItems\": true,",
+                  "  \"items\": {",
+                  "    \"type\": \"object\",",
+                  "    \"required\": [",
+                  "      \"date\",",
+                  "      \"base\",",
+                  "      \"quote\",",
+                  "      \"rate\"",
+                  "    ],",
+                  "    \"properties\": {",
+                  "      \"date\": {",
+                  "        \"type\": \"string\",",
+                  "        \"minLength\": 1",
+                  "      },",
+                  "      \"base\": {",
+                  "        \"type\": \"string\",",
+                  "        \"minLength\": 1",
+                  "      },",
+                  "      \"quote\": {",
+                  "        \"type\": \"string\",",
+                  "        \"minLength\": 1",
+                  "      },",
+                  "      \"rate\": {",
+                  "        \"type\": \"number\"",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "} ",
+                  "",
+                  "pm.test(\"Schema is valid\", function () {",
+                  "    const validate = ajv.compile(schema);",
+                  "    const valid = validate(response);",
+                  "    pm.expect(valid, JSON.stringify(validate.errors)).to.be.true;",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?base=USD",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "quotes",
+                  "value": "USD,AED",
+                  "disabled": true
+                },
+                {
+                  "key": "base",
+                  "value": "USD"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change base currency to INR",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Change base currency to USD",
+                  "let response = pm.response.json();",
+                  "pm.test(\"Base currency should be INR\", function () {",
+                  "    pm.expect(response[0].base).to.eql(\"INR\");",
+                  "});",
+                  "",
+                  "//Verify the JSON Schema",
+                  "const Ajv = require('ajv');",
+                  "const ajv = new Ajv({ allErrors: true });",
+                  "",
+                  "const schema = {",
+                  "  \"type\": \"array\",",
+                  "  \"description\": \"\",",
+                  "  \"minItems\": 1,",
+                  "  \"uniqueItems\": true,",
+                  "  \"items\": {",
+                  "    \"type\": \"object\",",
+                  "    \"required\": [",
+                  "      \"date\",",
+                  "      \"base\",",
+                  "      \"quote\",",
+                  "      \"rate\"",
+                  "    ],",
+                  "    \"properties\": {",
+                  "      \"date\": {",
+                  "        \"type\": \"string\",",
+                  "        \"minLength\": 1",
+                  "      },",
+                  "      \"base\": {",
+                  "        \"type\": \"string\",",
+                  "        \"minLength\": 1",
+                  "      },",
+                  "      \"quote\": {",
+                  "        \"type\": \"string\",",
+                  "        \"minLength\": 1",
+                  "      },",
+                  "      \"rate\": {",
+                  "        \"type\": \"number\"",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "} ",
+                  "",
+                  "pm.test(\"Schema is valid\", function () {",
+                  "    const validate = ajv.compile(schema);",
+                  "    const valid = validate(response);",
+                  "    pm.expect(valid, JSON.stringify(validate.errors)).to.be.true;",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?base=INR",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "quotes",
+                  "value": "USD,AED",
+                  "disabled": true
+                },
+                {
+                  "key": "base",
+                  "value": "INR"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Invalid base currency",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Invalid Base currency",
+                  "pm.test(\"Invalid Base currency\", function () {",
+                  "    pm.expect(pm.response.json().message).to.eql(\"invalid currency: AAA\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?base=AAA",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "quotes",
+                  "value": "USD,AED",
+                  "disabled": true
+                },
+                {
+                  "key": "base",
+                  "value": "AAA"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Empty base currency",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Empty Base currency",
+                  "pm.test(\"Empty Base currency\", function () {",
+                  "    pm.expect(pm.response.json().message).to.eql(\"invalid currency: \");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?base=",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "quotes",
+                  "value": "USD,AED",
+                  "disabled": true
+                },
+                {
+                  "key": "base",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Filter Target Currency",
+      "item": [
+        {
+          "name": "Filter only INR",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let response = pm.response.json();\r",
+                  "pm.test(\"INR Returned\", function() {\r",
+                  "    pm.expect(response.length).to.eql(1);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?quotes=INR",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "quotes",
+                  "value": "INR"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter Multiple currencies",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let response = pm.response.json();\r",
+                  "pm.test(\"Multiple currencies returned\", function() {\r",
+                  "    pm.expect(response.length).to.eql(2);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?quotes=USD,GBP",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "quotes",
+                  "value": "USD,GBP"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter Empty currencies",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let response = pm.response.json();\r",
+                  "pm.test(\"empty response \", function() {\r",
+                  "    pm.expect(response.length).to.eql(0);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?quotes=",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "quotes",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter Invalid currencies",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "\r",
+                  "//Validation for filtering Invalid currency\r",
+                  "pm.test(\"Invalid Base currency\", function () {\r",
+                  "    pm.expect(pm.response.json().message).to.eql(\"invalid currency: BBB\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?quotes=BBB",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "quotes",
+                  "value": "BBB"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Historical Exchange Rate",
+      "item": [
+        {
+          "name": "Valid historical date",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Validated historical date",
+                  "let response = pm.response.json();",
+                  "pm.test(\"Historical data avialable\", function () {",
+                  "    let firstItem;",
+                  "    if (Array.isArray(response)) {",
+                  "        pm.expect(response).to.be.an('array').that.is.not.empty;",
+                  "        firstItem = response[0];",
+                  "    } else {",
+                  "        firstItem = response;",
+                  "    }",
+                  "    pm.expect(firstItem).to.be.an('object');",
+                  "    pm.expect(firstItem).to.have.property('date');",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?date=2020-01-04",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2020-01-04"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Very old date",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Validated Very old date",
+                  "let response = pm.response.json();",
+                  "pm.test(\"Historical data avialable\", function () {",
+                  "    let firstItem;",
+                  "    if (Array.isArray(response)) {",
+                  "        pm.expect(response).to.be.an('array').that.is.not.empty;",
+                  "        firstItem = response[0];",
+                  "    } else {",
+                  "        firstItem = response;",
+                  "    }",
+                  "    pm.expect(firstItem).to.be.an('object');",
+                  "    pm.expect(firstItem).to.have.property('date');",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?date=1999-01-04",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "1999-01-04"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Leap year date",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Validated Leap year date",
+                  "let response = pm.response.json();",
+                  "pm.test(\"Leap year date data avialable\", function () {",
+                  "    let firstItem;",
+                  "    if (Array.isArray(response)) {",
+                  "        pm.expect(response).to.be.an('array').that.is.not.empty;",
+                  "        firstItem = response[0];",
+                  "    } else {",
+                  "        firstItem = response;",
+                  "    }",
+                  "    pm.expect(firstItem).to.be.an('object');",
+                  "    pm.expect(firstItem).to.have.property('date');",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?date=2024-02-29",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2024-02-29"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Non-Leap year date",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Validation Non leap year",
+                  "pm.test(\"Invalid Date\", function () {",
+                  "    pm.expect(pm.response.json().message).to.eql(\"invalid date\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?date=2025-02-29",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2025-02-29"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Future date",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let response = pm.response.json();",
+                  "pm.test(\"empty response\", function () {",
+                  "    pm.expect(response).to.be.an('array').that.is.empty;",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?date=2029-01-04",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2029-01-04"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Invalid date format",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Validation for invalid date format",
+                  "pm.test(\"Invalid date format\", function () {",
+                  "    pm.expect(pm.response.json().message).to.eql(\"invalid date\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?date=2025-31-04",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2025-31-04"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Exchange Rate Over Period",
+      "item": [
+        {
+          "name": "Fetch rates over a period",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Validate no future rate returned",
+                  "const response = pm.response.json();",
+                  "",
+                  "const today = new Date();",
+                  "",
+                  "pm.test(\"No future dates returned\", function () {",
+                  "",
+                  "    response.forEach(item => {",
+                  "",
+                  "        pm.expect(new Date(item.date))",
+                  "          .to.be.below(today);",
+                  "",
+                  "    });",
+                  "",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?from=2026-01-01&quotes=USD,INR",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "2026-01-01"
+                },
+                {
+                  "key": "quotes",
+                  "value": "USD,INR"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Valid start/end dates",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verify status code",
+                  "pm.test(\"Status code should be 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.frankfurter.app/2024-01-02..2024-03-31?base=USD&symbols=EUR",
+              "protocol": "https",
+              "host": [
+                "api",
+                "frankfurter",
+                "app"
+              ],
+              "path": [
+                "2024-01-02..2024-03-31"
+              ],
+              "query": [
+                {
+                  "key": "base",
+                  "value": "USD"
+                },
+                {
+                  "key": "symbols",
+                  "value": "EUR"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Same start and end date",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verify status code",
+                  "pm.test(\"Status code should be 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.frankfurter.app/2024-03-28..2024-03-28?base=USD&symbols=EUR",
+              "protocol": "https",
+              "host": [
+                "api",
+                "frankfurter",
+                "app"
+              ],
+              "path": [
+                "2024-03-28..2024-03-28"
+              ],
+              "query": [
+                {
+                  "key": "base",
+                  "value": "USD"
+                },
+                {
+                  "key": "symbols",
+                  "value": "EUR"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Start date after end date",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verify status code",
+                  "pm.test(\"Not found 404\", function () {",
+                  "    pm.response.to.have.status(404);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.frankfurter.app/2026-03-28..2024-03-28?base=USD&symbols=EUR",
+              "protocol": "https",
+              "host": [
+                "api",
+                "frankfurter",
+                "app"
+              ],
+              "path": [
+                "2026-03-28..2024-03-28"
+              ],
+              "query": [
+                {
+                  "key": "base",
+                  "value": "USD"
+                },
+                {
+                  "key": "symbols",
+                  "value": "EUR"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Missing start date",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verify status code",
+                  "pm.test(\"Not found 404\", function () {",
+                  "    pm.response.to.have.status(404);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.frankfurter.app/..2024-01-02?base=USD&symbols=EUR",
+              "protocol": "https",
+              "host": [
+                "api",
+                "frankfurter",
+                "app"
+              ],
+              "path": [
+                "..2024-01-02"
+              ],
+              "query": [
+                {
+                  "key": "base",
+                  "value": "USD"
+                },
+                {
+                  "key": "symbols",
+                  "value": "EUR"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Missing end date",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verify status code",
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.frankfurter.app/2024-01-02..?base=USD&symbols=EUR",
+              "protocol": "https",
+              "host": [
+                "api",
+                "frankfurter",
+                "app"
+              ],
+              "path": [
+                "2024-01-02.."
+              ],
+              "query": [
+                {
+                  "key": "base",
+                  "value": "USD"
+                },
+                {
+                  "key": "symbols",
+                  "value": "EUR"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Time Series",
+      "item": [
+        {
+          "name": "Daily time series",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?from=2026-01-01",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "2026-01-01"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Time series with group(Month)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Validate Status Code",
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// Validate Response data type",
+                  "const json = pm.response.json();",
+                  "",
+                  "pm.test(\"Response is an array\", () => {",
+                  "    pm.expect(json).to.be.an(\"array\");",
+                  "});",
+                  "",
+                  "pm.test(\"Array is not empty\", () => {",
+                  "    pm.expect(json.length).to.be.greaterThan(0);",
+                  "});",
+                  "",
+                  "//Validate Monthly Groups",
+                  "",
+                  "const months = new Set();",
+                  "json.forEach(item => {",
+                  "    months.add(item.date.substring(0, 7));",
+                  "});",
+                  "const expected = [",
+                  "    \"2026-01\",",
+                  "    \"2026-02\",",
+                  "    \"2026-03\",",
+                  "    \"2026-04\",",
+                  "    \"2026-05\",",
+                  "    \"2026-06\",",
+                  "    \"2026-07\"",
+                  "];",
+                  "expected.forEach(month => {",
+                  "    pm.test(`${month} exists`, () => {",
+                  "        pm.expect(months.has(month)).to.be.true;",
+                  "    });",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?from=2026-01-01&group=month",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "2026-01-01"
+                },
+                {
+                  "key": "group",
+                  "value": "month"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Time series with group(week)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?from=2026-01-01&group=week",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "2026-01-01"
+                },
+                {
+                  "key": "group",
+                  "value": "week"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Invalid group parameter",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Invalid Group 422\", function () {",
+                  "    pm.response.to.have.status(422);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?from=2026-01-01&group=yearly",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "2026-01-01"
+                },
+                {
+                  "key": "group",
+                  "value": "yearly"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Empty group parameter",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Empty Group 422\", function () {",
+                  "    pm.response.to.have.status(422);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?from=2026-01-01&group=",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "2026-01-01"
+                },
+                {
+                  "key": "group",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Provider & Attribution",
+      "item": [
+        {
+          "name": "specific providers",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();\r",
+                  "pm.test(\"Provider is BAM\", function () {\r",
+                  "    response.forEach(item => {\r",
+                  "        if (!item.providers) return; // skip base currency (e.g. EUR/EUR) which has no providers\r",
+                  "        item.providers.forEach(provider => {\r",
+                  "            pm.expect(provider.key).to.eql(\"BAM\");\r",
+                  "        });\r",
+                  "    });\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?providers=BAM",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "providers",
+                  "value": "BAM"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Invalid provider",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//verify error status code\r",
+                  "pm.test(\"Status code is 402\", function () {\r",
+                  "    pm.response.to.have.status(402);\r",
+                  "});\r",
+                  "    "
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?providers=AMMMMM",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "providers",
+                  "value": "AMMMMM"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Fetch Provider Attribution",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "",
+                  "pm.test(\"Providers are expanded\", function () {",
+                  "    let jsonData = pm.response.json();",
+                  "",
+                  "    pm.expect(jsonData[0]).to.have.property(\"providers\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates?expand=providers",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "expand",
+                  "value": "providers"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Rates  as CSV",
+      "item": [
+        {
+          "name": "Rates  as CSV. Append",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Validate content type\r",
+                  "pm.test(\"Response is CSV\", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+                  "      .to.include(\"text/csv\");\r",
+                  "});\r",
+                  "\r",
+                  "//Validate CSV is not empty\r",
+                  "\r",
+                  "pm.test(\"CSV contains data\", function () {\r",
+                  "    let csv = pm.response.text();\r",
+                  "    pm.expect(csv.length).to.be.above(0);\r",
+                  "});\r",
+                  "\r",
+                  "//Validate CSV headers\r",
+                  "\r",
+                  "pm.test(\"CSV contains expected headers\", function () {\r",
+                  "    let csv = pm.response.text();\r",
+                  "    let headers = csv.split(\"\\n\")[0];\r",
+                  "\r",
+                  "    pm.expect(headers).to.include(\"date\");\r",
+                  "    pm.expect(headers).to.include(\"base\");\r",
+                  "    pm.expect(headers).to.include(\"quote\");\r",
+                  "     pm.expect(headers).to.include(\"rate\");\r",
+                  "    \r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rates.csv",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rates.csv"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Currency Information",
+      "item": [
+        {
+          "name": "Available currencies",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Validate currency list exists",
+                  "",
+                  "pm.test(\"Currency list is available\", function () {",
+                  "    let data = pm.response.json();",
+                  "",
+                  "    pm.expect(data).to.be.an(\"array\");",
+                  "    pm.expect(data.length).to.be.above(0);",
+                  "});",
+                  "//Validate ISO currency code format",
+                  " pm.test(\"Currency codes are valid ISO format\", function () {",
+                  "    let currencies = pm.response.json();",
+                  "    currencies.forEach(currency => {",
+                  "        pm.expect(currency.iso_code).to.match(/^[A-Z]{3}$/);",
+                  "    });",
+                  " });",
+                  "//Validate duplicate currency codes",
+                  " pm.test(\"No duplicate currency codes\", function () {",
+                  "    let currencies = pm.response.json();",
+                  "",
+                  "    let codes = currencies.map(c => c.iso_code);",
+                  "    let uniqueCodes = [...new Set(codes)];",
+                  "",
+                  "    pm.expect(codes.length).to.eql(uniqueCodes.length);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/currencies",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "currencies"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Legacy currencies with scope",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Validate access with required scope",
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "",
+                  "",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/currencies?scope=all",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "currencies"
+              ],
+              "query": [
+                {
+                  "key": "scope",
+                  "value": "all"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Coverage for a single currency",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Validate Status Code\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "//Validate Response is JSON\r",
+                  "pm.test(\"Response is Json\", function (){\r",
+                  "    pm.response.to.be.json;\r",
+                  "})\r",
+                  "\r",
+                  "//Validate Mandatory Fields\r",
+                  "pm.test(\"Mandatory fields are present\", function () {\r",
+                  "    let json = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(json).to.have.property(\"iso_code\");\r",
+                  "    pm.expect(json).to.have.property(\"iso_numeric\");\r",
+                  "    pm.expect(json).to.have.property(\"name\");\r",
+                  "    pm.expect(json).to.have.property(\"symbol\");\r",
+                  "    pm.expect(json).to.have.property(\"start_date\");\r",
+                  "    pm.expect(json).to.have.property(\"end_date\");\r",
+                  "    pm.expect(json).to.have.property(\"providers\");\r",
+                  "});\r",
+                  "//Validate Currency Code\r",
+                  "pm.test(\"Currency code is EUR\", function () {\r",
+                  "    let json = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(json.iso_code).to.eql(\"EUR\");\r",
+                  "});\r",
+                  "//Validate Currency Name\r",
+                  "pm.test(\"Currency name is Euro\", function () {\r",
+                  "    let json = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(json.name).to.eql(\"Euro\");\r",
+                  "});\r",
+                  "\r",
+                  " //Validate Currency Symbol\r",
+                  "pm.test(\"Currency symbol is correct\", function () {\r",
+                  "    let json = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(json.symbol).to.eql(\"€\");\r",
+                  "});\r",
+                  "//Validate Date Logic\r",
+                  "pm.test(\"Start date is before or equal to End date\", function () {\r",
+                  "    let json = pm.response.json();\r",
+                  "\r",
+                  "    let start = new Date(json.start_date);\r",
+                  "    let end = new Date(json.end_date);\r",
+                  "\r",
+                  "    pm.expect(start.getTime()).to.be.at.most(end.getTime());\r",
+                  "});\r",
+                  "\r",
+                  "//Validate Duplicate Providers\r",
+                  "pm.test(\"No duplicate providers\", function () {\r",
+                  "    let json = pm.response.json();\r",
+                  "\r",
+                  "    let unique = [...new Set(json.providers)];\r",
+                  "\r",
+                  "    pm.expect(unique.length).to.eql(json.providers.length);\r",
+                  "});\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/currency/EUR",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "currency",
+                "EUR"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List the data sources",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verify status code\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "// Verify response is JSON\r",
+                  "pm.test(\"Response is JSON\", function () {\r",
+                  "    pm.response.to.be.json;\r",
+                  "});\r",
+                  "// Verify response is an array\r",
+                  "pm.test(\"Response is an arry\", function () {\r",
+                  "  const response = pm.response.json();\r",
+                  "  pm.expect(response).to.be.an(\"array\");\r",
+                  "});\r",
+                  "\r",
+                  "// Verify array is not empty\r",
+                  "pm.test(\"Providers list is not empty\", function () {\r",
+                  "     const response = pm.response.json();\r",
+                  "        pm.expect(response.length).to.be.above(0);\r",
+                  "});\r",
+                  "// Verify required fields exist\r",
+                  "pm.test(\"Each provider contain country_code, key, name, rate_type and base\")\r",
+                  "  const jsonData = pm.response.json();\r",
+                  "\r",
+                  "   jsonData.forEach(provider => {\r",
+                  "    pm.expect(provider).to.have.property(\"country_code\");\r",
+                  "    pm.expect(provider).to.have.property(\"name\");\r",
+                  "    pm.expect(provider).to.have.property(\"pivot_currency\");\r",
+                  "    pm.expect(provider).to.have.property(\"key\");\r",
+                  "    pm.expect(provider).to.have.property(\"rate_type\");\r",
+                  "    });\r",
+                  "  "
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/providers",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "providers"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Currency Conversion",
+      "item": [
+        {
+          "name": "Rate for a single currency pair",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Validate currency pair (EUR/INR test - note: your URL is USD/EUR, so adjust accordingly)\r",
+                  "pm.test(\"Validate base currency\", function () {\r",
+                  "    let response = pm.response.json();\r",
+                  "    pm.expect(response.base).to.eql(\"USD\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Validate quote currency\", function () {\r",
+                  "    let response = pm.response.json();\r",
+                  "    pm.expect(response.quote).to.eql(\"EUR\");\r",
+                  "});\r",
+                  "pm.test(\"Validate base currency\", function () {\r",
+                  "    let response = pm.response.json();\r",
+                  "    pm.expect(response.base).to.eql(\"EUR\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Validate quote currency\", function () {\r",
+                  "    let response = pm.response.json();\r",
+                  "    pm.expect(response.quote).to.eql(\"USD\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL_Base}}/rate/USD/EUR",
+              "host": [
+                "{{URL_Base}}"
+              ],
+              "path": [
+                "rate",
+                "USD",
+                "EUR"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Multiple Currency Conversion",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.frankfurter.app/latest?from=USD&to=EUR%2CGBP%2CINR",
+              "protocol": "https",
+              "host": [
+                "api",
+                "frankfurter",
+                "app"
+              ],
+              "path": [
+                "latest"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "USD"
+                },
+                {
+                  "key": "to",
+                  "value": "EUR,GBP,INR"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Latest Rate → Convert Amount",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let response = pm.response.json();",
+                  "",
+                  "// Extract the exchange rate",
+                  "let rate = response.rates.EUR;",
+                  "",
+                  "// Store it in an environment variable",
+                  "pm.environment.set(\"exchangeRate\", rate);",
+                  "console.log(\"Exchange Rate:\", rate);",
+                  "",
+                  "let amount = 100;",
+                  "let convertedAmount = amount * rate;",
+                  "",
+                  "console.log(\"Converted Amount:\", convertedAmount);",
+                  "",
+                  "// Save it as an environment variable",
+                  "pm.environment.set(\"convertedAmount\", convertedAmount);",
+                  "",
+                  "pm.test(\"Converted amount should be correct\", function () {",
+                  "    pm.expect(convertedAmount).to.eql(pm.environment.get(\"convertedAmount\"));",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.frankfurter.app/latest?from=USD&to=EUR",
+              "protocol": "https",
+              "host": [
+                "api",
+                "frankfurter",
+                "app"
+              ],
+              "path": [
+                "latest"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "USD"
+                },
+                {
+                  "key": "to",
+                  "value": "EUR"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "URL_Base",
+      "value": "https://api.frankfurter.dev/v2"
+    }
+  ]
+}
