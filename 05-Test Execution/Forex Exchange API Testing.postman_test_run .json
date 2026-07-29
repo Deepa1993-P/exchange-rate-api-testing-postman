@@ -1,0 +1,1340 @@
+{
+  "id": "4dcee3ba-022f-417f-98c2-71b45d068729",
+  "name": "Banking Forex Exchange API Testing",
+  "timestamp": "2026-07-29T08:17:32.878Z",
+  "collection_id": "56161681-9b43a021-3bea-42a4-ba9e-9ba7a4e7bb8f",
+  "folder_id": 0,
+  "environment_id": "56161681-7fe02661-2b32-4e4a-9292-4aa05bc12964",
+  "totalPass": 65,
+  "delay": 0,
+  "persist": true,
+  "status": "finished",
+  "startedAt": "2026-07-29T08:16:50.811Z",
+  "totalFail": 3,
+  "results": [
+    {
+      "id": "c476332c-5954-42a3-8427-986fde1b253d",
+      "name": "Fetch the exchange rates.",
+      "url": "https://api.frankfurter.dev/v2/rates",
+      "time": 1643,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Status code is 200": true,
+        "Response should not be empty": true,
+        "Currency fields should exist": true
+      },
+      "testPassFailCounts": {
+        "Status code is 200": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Response should not be empty": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Currency fields should exist": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        1643
+      ],
+      "allTests": [
+        {
+          "Status code is 200": true,
+          "Response should not be empty": true,
+          "Currency fields should exist": true
+        }
+      ]
+    },
+    {
+      "id": "d56d8829-d52f-4f9b-8b37-dfc62960c882",
+      "name": "Change the base currency",
+      "url": "https://api.frankfurter.dev/v2/rates?base=USD",
+      "time": 750,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Base currency should be USD": true,
+        "Schema is valid": true
+      },
+      "testPassFailCounts": {
+        "Base currency should be USD": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Schema is valid": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        750
+      ],
+      "allTests": [
+        {
+          "Base currency should be USD": true,
+          "Schema is valid": true
+        }
+      ]
+    },
+    {
+      "id": "7e17bae2-ff27-4aa7-8ee6-57dee337ba8d",
+      "name": "Change base currency to INR",
+      "url": "https://api.frankfurter.dev/v2/rates?base=INR",
+      "time": 987,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Base currency should be INR": true,
+        "Schema is valid": true
+      },
+      "testPassFailCounts": {
+        "Base currency should be INR": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Schema is valid": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        987
+      ],
+      "allTests": [
+        {
+          "Base currency should be INR": true,
+          "Schema is valid": true
+        }
+      ]
+    },
+    {
+      "id": "38336b78-71bb-4dae-bbb0-041a226e8685",
+      "name": "Invalid base currency",
+      "url": "https://api.frankfurter.dev/v2/rates?base=AAA",
+      "time": 732,
+      "responseCode": {
+        "code": 422,
+        "name": "Unprocessable Entity (WebDAV) (RFC 4918)"
+      },
+      "tests": {
+        "Invalid Base currency": true
+      },
+      "testPassFailCounts": {
+        "Invalid Base currency": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        732
+      ],
+      "allTests": [
+        {
+          "Invalid Base currency": true
+        }
+      ]
+    },
+    {
+      "id": "9db91965-a75b-4b09-8753-805ece08d607",
+      "name": "Empty base currency",
+      "url": "https://api.frankfurter.dev/v2/rates?base=",
+      "time": 761,
+      "responseCode": {
+        "code": 422,
+        "name": "Unprocessable Entity (WebDAV) (RFC 4918)"
+      },
+      "tests": {
+        "Empty Base currency": true
+      },
+      "testPassFailCounts": {
+        "Empty Base currency": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        761
+      ],
+      "allTests": [
+        {
+          "Empty Base currency": true
+        }
+      ]
+    },
+    {
+      "id": "cc02a6c8-5546-4165-936f-15fddcbf64e2",
+      "name": "Filter only INR",
+      "url": "https://api.frankfurter.dev/v2/rates?quotes=INR",
+      "time": 1379,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "INR Returned": true
+      },
+      "testPassFailCounts": {
+        "INR Returned": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        1379
+      ],
+      "allTests": [
+        {
+          "INR Returned": true
+        }
+      ]
+    },
+    {
+      "id": "0c4c5a65-21a9-4f7e-9b60-8c3463c49199",
+      "name": "Filter Multiple currencies",
+      "url": "https://api.frankfurter.dev/v2/rates?quotes=USD,GBP",
+      "time": 871,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Multiple currencies returned": true
+      },
+      "testPassFailCounts": {
+        "Multiple currencies returned": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        871
+      ],
+      "allTests": [
+        {
+          "Multiple currencies returned": true
+        }
+      ]
+    },
+    {
+      "id": "1557ddfb-d2a3-4db4-9588-1f026d93f2d3",
+      "name": "Filter Empty currencies",
+      "url": "https://api.frankfurter.dev/v2/rates?quotes=",
+      "time": 1057,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "empty response ": true
+      },
+      "testPassFailCounts": {
+        "empty response ": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        1057
+      ],
+      "allTests": [
+        {
+          "empty response ": true
+        }
+      ]
+    },
+    {
+      "id": "cf2ff0e6-bb56-4371-99d2-9753a551f7cd",
+      "name": "Filter Invalid currencies",
+      "url": "https://api.frankfurter.dev/v2/rates?quotes=BBB",
+      "time": 651,
+      "responseCode": {
+        "code": 422,
+        "name": "Unprocessable Entity (WebDAV) (RFC 4918)"
+      },
+      "tests": {
+        "Invalid Base currency": true
+      },
+      "testPassFailCounts": {
+        "Invalid Base currency": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        651
+      ],
+      "allTests": [
+        {
+          "Invalid Base currency": true
+        }
+      ]
+    },
+    {
+      "id": "f16c43bf-3ac7-4dcd-9878-d0963841d34a",
+      "name": "Valid historical date",
+      "url": "https://api.frankfurter.dev/v2/rates?date=2020-01-04",
+      "time": 969,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Historical data avialable": true
+      },
+      "testPassFailCounts": {
+        "Historical data avialable": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        969
+      ],
+      "allTests": [
+        {
+          "Historical data avialable": true
+        }
+      ]
+    },
+    {
+      "id": "866465f2-f291-4df6-af70-4eb8b835151a",
+      "name": "Very old date",
+      "url": "https://api.frankfurter.dev/v2/rates?date=1999-01-04",
+      "time": 737,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Historical data avialable": true
+      },
+      "testPassFailCounts": {
+        "Historical data avialable": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        737
+      ],
+      "allTests": [
+        {
+          "Historical data avialable": true
+        }
+      ]
+    },
+    {
+      "id": "49a059fd-5cf0-43fd-ac45-0a1d04dd30b5",
+      "name": "Leap year date",
+      "url": "https://api.frankfurter.dev/v2/rates?date=2024-02-29",
+      "time": 859,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Leap year date data avialable": true
+      },
+      "testPassFailCounts": {
+        "Leap year date data avialable": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        859
+      ],
+      "allTests": [
+        {
+          "Leap year date data avialable": true
+        }
+      ]
+    },
+    {
+      "id": "1bec46f8-b0c6-4d3c-8143-853e89c7929d",
+      "name": "Non-Leap year date",
+      "url": "https://api.frankfurter.dev/v2/rates?date=2025-02-29",
+      "time": 439,
+      "responseCode": {
+        "code": 422,
+        "name": "Unprocessable Entity (WebDAV) (RFC 4918)"
+      },
+      "tests": {
+        "Invalid Date": true
+      },
+      "testPassFailCounts": {
+        "Invalid Date": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        439
+      ],
+      "allTests": [
+        {
+          "Invalid Date": true
+        }
+      ]
+    },
+    {
+      "id": "53fcb860-d0ec-4df2-ba9b-5810b9647a54",
+      "name": "Future date",
+      "url": "https://api.frankfurter.dev/v2/rates?date=2029-01-04",
+      "time": 725,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "empty response": true
+      },
+      "testPassFailCounts": {
+        "empty response": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        725
+      ],
+      "allTests": [
+        {
+          "empty response": true
+        }
+      ]
+    },
+    {
+      "id": "fa055d7e-f92f-4bf6-80e5-9a12e3ee5518",
+      "name": "Invalid date format",
+      "url": "https://api.frankfurter.dev/v2/rates?date=2025-31-04",
+      "time": 379,
+      "responseCode": {
+        "code": 422,
+        "name": "Unprocessable Entity (WebDAV) (RFC 4918)"
+      },
+      "tests": {
+        "Invalid date format": true
+      },
+      "testPassFailCounts": {
+        "Invalid date format": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        379
+      ],
+      "allTests": [
+        {
+          "Invalid date format": true
+        }
+      ]
+    },
+    {
+      "id": "9879c49f-f86c-4a0c-b430-925a2db3683c",
+      "name": "Fetch rates over a period",
+      "url": "https://api.frankfurter.dev/v2/rates?from=2026-01-01&quotes=USD,INR",
+      "time": 1101,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "No future dates returned": true
+      },
+      "testPassFailCounts": {
+        "No future dates returned": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        1101
+      ],
+      "allTests": [
+        {
+          "No future dates returned": true
+        }
+      ]
+    },
+    {
+      "id": "b467bff7-c42c-491d-99ca-c63b8ee2f27f",
+      "name": "Valid start/end dates",
+      "url": "https://api.frankfurter.app/2024-01-02..2024-03-31?base=USD&symbols=EUR",
+      "time": 820,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Status code should be 200": true
+      },
+      "testPassFailCounts": {
+        "Status code should be 200": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        820
+      ],
+      "allTests": [
+        {
+          "Status code should be 200": true
+        }
+      ]
+    },
+    {
+      "id": "471f39ad-5d5a-4e2b-bc05-3af08378c800",
+      "name": "Same start and end date",
+      "url": "https://api.frankfurter.app/2024-03-28..2024-03-28?base=USD&symbols=EUR",
+      "time": 400,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Status code should be 200": true
+      },
+      "testPassFailCounts": {
+        "Status code should be 200": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        400
+      ],
+      "allTests": [
+        {
+          "Status code should be 200": true
+        }
+      ]
+    },
+    {
+      "id": "07e4a5d6-94e6-4e60-a06a-240fa6accb3a",
+      "name": "Start date after end date",
+      "url": "https://api.frankfurter.app/2026-03-28..2024-03-28?base=USD&symbols=EUR",
+      "time": 743,
+      "responseCode": {
+        "code": 404,
+        "name": "Not Found"
+      },
+      "tests": {
+        "Not found 404": true
+      },
+      "testPassFailCounts": {
+        "Not found 404": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        743
+      ],
+      "allTests": [
+        {
+          "Not found 404": true
+        }
+      ]
+    },
+    {
+      "id": "1b76b6c7-4a73-4db0-b879-7fad96344013",
+      "name": "Missing start date",
+      "url": "https://api.frankfurter.app/..2024-01-02?base=USD&symbols=EUR",
+      "time": 636,
+      "responseCode": {
+        "code": 404,
+        "name": "Not Found"
+      },
+      "tests": {
+        "Not found 404": true
+      },
+      "testPassFailCounts": {
+        "Not found 404": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        636
+      ],
+      "allTests": [
+        {
+          "Not found 404": true
+        }
+      ]
+    },
+    {
+      "id": "49711c53-4225-4cb5-9b87-5b7f2e7bfa9d",
+      "name": "Missing end date",
+      "url": "https://api.frankfurter.app/2024-01-02..?base=USD&symbols=EUR",
+      "time": 1059,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Status code is 200": true
+      },
+      "testPassFailCounts": {
+        "Status code is 200": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        1059
+      ],
+      "allTests": [
+        {
+          "Status code is 200": true
+        }
+      ]
+    },
+    {
+      "id": "42515370-4c18-4810-a087-8f58ca43e154",
+      "name": "Daily time series",
+      "url": "https://api.frankfurter.dev/v2/rates?from=2026-01-01",
+      "time": 3504,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Status code is 200": true
+      },
+      "testPassFailCounts": {
+        "Status code is 200": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        3504
+      ],
+      "allTests": [
+        {
+          "Status code is 200": true
+        }
+      ]
+    },
+    {
+      "id": "e852b9aa-9b9d-44b0-b632-96f3a4fcd268",
+      "name": "Time series with group(Month)",
+      "url": "https://api.frankfurter.dev/v2/rates?from=2026-01-01&group=month",
+      "time": 1212,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Status code is 200": true,
+        "Response is an array": true,
+        "Array is not empty": true,
+        "2026-01 exists": true,
+        "2026-02 exists": true,
+        "2026-03 exists": true,
+        "2026-04 exists": true,
+        "2026-05 exists": true,
+        "2026-06 exists": true,
+        "2026-07 exists": true
+      },
+      "testPassFailCounts": {
+        "Status code is 200": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Response is an array": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Array is not empty": {
+          "pass": 1,
+          "fail": 0
+        },
+        "2026-01 exists": {
+          "pass": 1,
+          "fail": 0
+        },
+        "2026-02 exists": {
+          "pass": 1,
+          "fail": 0
+        },
+        "2026-03 exists": {
+          "pass": 1,
+          "fail": 0
+        },
+        "2026-04 exists": {
+          "pass": 1,
+          "fail": 0
+        },
+        "2026-05 exists": {
+          "pass": 1,
+          "fail": 0
+        },
+        "2026-06 exists": {
+          "pass": 1,
+          "fail": 0
+        },
+        "2026-07 exists": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        1212
+      ],
+      "allTests": [
+        {
+          "Status code is 200": true,
+          "Response is an array": true,
+          "Array is not empty": true,
+          "2026-01 exists": true,
+          "2026-02 exists": true,
+          "2026-03 exists": true,
+          "2026-04 exists": true,
+          "2026-05 exists": true,
+          "2026-06 exists": true,
+          "2026-07 exists": true
+        }
+      ]
+    },
+    {
+      "id": "2cf29b33-ab9e-49d3-b94b-cc6573d9ebcf",
+      "name": "Time series with group(week)",
+      "url": "https://api.frankfurter.dev/v2/rates?from=2026-01-01&group=week",
+      "time": 2686,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Status code is 200": true
+      },
+      "testPassFailCounts": {
+        "Status code is 200": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        2686
+      ],
+      "allTests": [
+        {
+          "Status code is 200": true
+        }
+      ]
+    },
+    {
+      "id": "ddfa5b4a-bba3-4edb-92e5-f429519aba6e",
+      "name": "Invalid group parameter",
+      "url": "https://api.frankfurter.dev/v2/rates?from=2026-01-01&group=yearly",
+      "time": 372,
+      "responseCode": {
+        "code": 422,
+        "name": "Unprocessable Entity (WebDAV) (RFC 4918)"
+      },
+      "tests": {
+        "Invalid Group 422": true
+      },
+      "testPassFailCounts": {
+        "Invalid Group 422": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        372
+      ],
+      "allTests": [
+        {
+          "Invalid Group 422": true
+        }
+      ]
+    },
+    {
+      "id": "633c66af-37d8-435b-a9c6-89b27ab90ac0",
+      "name": "Empty group parameter",
+      "url": "https://api.frankfurter.dev/v2/rates?from=2026-01-01&group=",
+      "time": 670,
+      "responseCode": {
+        "code": 422,
+        "name": "Unprocessable Entity (WebDAV) (RFC 4918)"
+      },
+      "tests": {
+        "Empty Group 422": true
+      },
+      "testPassFailCounts": {
+        "Empty Group 422": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        670
+      ],
+      "allTests": [
+        {
+          "Empty Group 422": true
+        }
+      ]
+    },
+    {
+      "id": "4a0f8c1e-6350-49ed-832d-327e91add520",
+      "name": "specific providers",
+      "url": "https://api.frankfurter.dev/v2/rates?providers=BAM",
+      "time": 947,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Provider is BAM": true
+      },
+      "testPassFailCounts": {
+        "Provider is BAM": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        947
+      ],
+      "allTests": [
+        {
+          "Provider is BAM": true
+        }
+      ]
+    },
+    {
+      "id": "ddb7e549-441f-4543-9f9d-1666ef928d6a",
+      "name": "Invalid provider",
+      "url": "https://api.frankfurter.dev/v2/rates?providers=AMMMMM",
+      "time": 608,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Status code is 402": false
+      },
+      "testPassFailCounts": {
+        "Status code is 402": {
+          "pass": 0,
+          "fail": 1
+        }
+      },
+      "times": [
+        608
+      ],
+      "allTests": [
+        {
+          "Status code is 402": false
+        }
+      ]
+    },
+    {
+      "id": "892971f8-e3b2-4129-95ed-15c3c2d146a9",
+      "name": "Fetch Provider Attribution",
+      "url": "https://api.frankfurter.dev/v2/rates?expand=providers",
+      "time": 3830,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Response is JSON": true,
+        "Providers are expanded": true
+      },
+      "testPassFailCounts": {
+        "Response is JSON": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Providers are expanded": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        3830
+      ],
+      "allTests": [
+        {
+          "Response is JSON": true,
+          "Providers are expanded": true
+        }
+      ]
+    },
+    {
+      "id": "925a74c7-efa2-4f15-a68b-c698df473d8f",
+      "name": "Rates  as CSV. Append",
+      "url": "https://api.frankfurter.dev/v2/rates.csv",
+      "time": 588,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Response is CSV": true,
+        "CSV contains data": true,
+        "CSV contains expected headers": true
+      },
+      "testPassFailCounts": {
+        "Response is CSV": {
+          "pass": 1,
+          "fail": 0
+        },
+        "CSV contains data": {
+          "pass": 1,
+          "fail": 0
+        },
+        "CSV contains expected headers": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        588
+      ],
+      "allTests": [
+        {
+          "Response is CSV": true,
+          "CSV contains data": true,
+          "CSV contains expected headers": true
+        }
+      ]
+    },
+    {
+      "id": "61ae49ae-6e9a-491d-be16-a13e8162fee8",
+      "name": "Available currencies",
+      "url": "https://api.frankfurter.dev/v2/currencies",
+      "time": 315,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Currency list is available": true,
+        "Currency codes are valid ISO format": true,
+        "No duplicate currency codes": true
+      },
+      "testPassFailCounts": {
+        "Currency list is available": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Currency codes are valid ISO format": {
+          "pass": 1,
+          "fail": 0
+        },
+        "No duplicate currency codes": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        315
+      ],
+      "allTests": [
+        {
+          "Currency list is available": true,
+          "Currency codes are valid ISO format": true,
+          "No duplicate currency codes": true
+        }
+      ]
+    },
+    {
+      "id": "39a8f02b-dfd3-41a0-a025-3c086b9be563",
+      "name": "Legacy currencies with scope",
+      "url": "https://api.frankfurter.dev/v2/currencies?scope=all",
+      "time": 870,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Status code is 200": true
+      },
+      "testPassFailCounts": {
+        "Status code is 200": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        870
+      ],
+      "allTests": [
+        {
+          "Status code is 200": true
+        }
+      ]
+    },
+    {
+      "id": "6d6ad366-d0f6-4c31-88a9-fab35769e564",
+      "name": "Coverage for a single currency",
+      "url": "https://api.frankfurter.dev/v2/currency/EUR",
+      "time": 655,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Status code is 200": true,
+        "Response is Json": true,
+        "Mandatory fields are present": true,
+        "Currency code is EUR": true,
+        "Currency name is Euro": true,
+        "Currency symbol is correct": true,
+        "Start date is before or equal to End date": true,
+        "No duplicate providers": true
+      },
+      "testPassFailCounts": {
+        "Status code is 200": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Response is Json": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Mandatory fields are present": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Currency code is EUR": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Currency name is Euro": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Currency symbol is correct": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Start date is before or equal to End date": {
+          "pass": 1,
+          "fail": 0
+        },
+        "No duplicate providers": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        655
+      ],
+      "allTests": [
+        {
+          "Status code is 200": true,
+          "Response is Json": true,
+          "Mandatory fields are present": true,
+          "Currency code is EUR": true,
+          "Currency name is Euro": true,
+          "Currency symbol is correct": true,
+          "Start date is before or equal to End date": true,
+          "No duplicate providers": true
+        }
+      ]
+    },
+    {
+      "id": "c22c6e90-8184-4f4f-87f6-c38af11ba972",
+      "name": "List the data sources",
+      "url": "https://api.frankfurter.dev/v2/providers",
+      "time": 1172,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Status code is 200": true,
+        "Response is JSON": true,
+        "Response is an arry": true,
+        "Providers list is not empty": true,
+        "Each provider contain country_code, key, name, rate_type and base": true
+      },
+      "testPassFailCounts": {
+        "Status code is 200": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Response is JSON": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Response is an arry": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Providers list is not empty": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Each provider contain country_code, key, name, rate_type and base": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        1172
+      ],
+      "allTests": [
+        {
+          "Status code is 200": true,
+          "Response is JSON": true,
+          "Response is an arry": true,
+          "Providers list is not empty": true,
+          "Each provider contain country_code, key, name, rate_type and base": true
+        }
+      ]
+    },
+    {
+      "id": "98dddf11-0511-4568-a28d-6da24da90e3a",
+      "name": "Rate for a single currency pair",
+      "url": "https://api.frankfurter.dev/v2/rate/USD/EUR",
+      "time": 970,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Validate base currency": false,
+        "Validate quote currency": false
+      },
+      "testPassFailCounts": {
+        "Validate base currency": {
+          "pass": 0,
+          "fail": 1
+        },
+        "Validate quote currency": {
+          "pass": 0,
+          "fail": 1
+        }
+      },
+      "times": [
+        970
+      ],
+      "allTests": [
+        {
+          "Validate base currency": false,
+          "Validate quote currency": false
+        }
+      ]
+    },
+    {
+      "id": "0eb7777f-b767-4f75-8aba-89264cd350a1",
+      "name": "Multiple Currency Conversion",
+      "url": "https://api.frankfurter.app/latest?from=USD&to=EUR,GBP,INR",
+      "time": 670,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {},
+      "testPassFailCounts": {},
+      "times": [
+        670
+      ],
+      "allTests": [
+        {}
+      ]
+    },
+    {
+      "id": "540185c7-2c3d-4066-afc2-a9ceab218641",
+      "name": "Latest Rate → Convert Amount",
+      "url": "https://api.frankfurter.app/latest?from=USD&to=EUR",
+      "time": 680,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Converted amount should be correct": true
+      },
+      "testPassFailCounts": {
+        "Converted amount should be correct": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        680
+      ],
+      "allTests": [
+        {
+          "Converted amount should be correct": true
+        }
+      ]
+    }
+  ],
+  "count": 1,
+  "totalTime": 37447,
+  "collection": {
+    "requests": [
+      {
+        "id": "c476332c-5954-42a3-8427-986fde1b253d",
+        "method": "GET"
+      },
+      {
+        "id": "d56d8829-d52f-4f9b-8b37-dfc62960c882",
+        "method": "GET"
+      },
+      {
+        "id": "7e17bae2-ff27-4aa7-8ee6-57dee337ba8d",
+        "method": "GET"
+      },
+      {
+        "id": "38336b78-71bb-4dae-bbb0-041a226e8685",
+        "method": "GET"
+      },
+      {
+        "id": "9db91965-a75b-4b09-8753-805ece08d607",
+        "method": "GET"
+      },
+      {
+        "id": "cc02a6c8-5546-4165-936f-15fddcbf64e2",
+        "method": "GET"
+      },
+      {
+        "id": "0c4c5a65-21a9-4f7e-9b60-8c3463c49199",
+        "method": "GET"
+      },
+      {
+        "id": "1557ddfb-d2a3-4db4-9588-1f026d93f2d3",
+        "method": "GET"
+      },
+      {
+        "id": "cf2ff0e6-bb56-4371-99d2-9753a551f7cd",
+        "method": "GET"
+      },
+      {
+        "id": "f16c43bf-3ac7-4dcd-9878-d0963841d34a",
+        "method": "GET"
+      },
+      {
+        "id": "866465f2-f291-4df6-af70-4eb8b835151a",
+        "method": "GET"
+      },
+      {
+        "id": "49a059fd-5cf0-43fd-ac45-0a1d04dd30b5",
+        "method": "GET"
+      },
+      {
+        "id": "1bec46f8-b0c6-4d3c-8143-853e89c7929d",
+        "method": "GET"
+      },
+      {
+        "id": "53fcb860-d0ec-4df2-ba9b-5810b9647a54",
+        "method": "GET"
+      },
+      {
+        "id": "fa055d7e-f92f-4bf6-80e5-9a12e3ee5518",
+        "method": "GET"
+      },
+      {
+        "id": "9879c49f-f86c-4a0c-b430-925a2db3683c",
+        "method": "GET"
+      },
+      {
+        "id": "b467bff7-c42c-491d-99ca-c63b8ee2f27f",
+        "method": "GET"
+      },
+      {
+        "id": "471f39ad-5d5a-4e2b-bc05-3af08378c800",
+        "method": "GET"
+      },
+      {
+        "id": "07e4a5d6-94e6-4e60-a06a-240fa6accb3a",
+        "method": "GET"
+      },
+      {
+        "id": "1b76b6c7-4a73-4db0-b879-7fad96344013",
+        "method": "GET"
+      },
+      {
+        "id": "49711c53-4225-4cb5-9b87-5b7f2e7bfa9d",
+        "method": "GET"
+      },
+      {
+        "id": "42515370-4c18-4810-a087-8f58ca43e154",
+        "method": "GET"
+      },
+      {
+        "id": "e852b9aa-9b9d-44b0-b632-96f3a4fcd268",
+        "method": "GET"
+      },
+      {
+        "id": "2cf29b33-ab9e-49d3-b94b-cc6573d9ebcf",
+        "method": "GET"
+      },
+      {
+        "id": "ddfa5b4a-bba3-4edb-92e5-f429519aba6e",
+        "method": "GET"
+      },
+      {
+        "id": "633c66af-37d8-435b-a9c6-89b27ab90ac0",
+        "method": "GET"
+      },
+      {
+        "id": "4a0f8c1e-6350-49ed-832d-327e91add520",
+        "method": "GET"
+      },
+      {
+        "id": "ddb7e549-441f-4543-9f9d-1666ef928d6a",
+        "method": "GET"
+      },
+      {
+        "id": "892971f8-e3b2-4129-95ed-15c3c2d146a9",
+        "method": "GET"
+      },
+      {
+        "id": "925a74c7-efa2-4f15-a68b-c698df473d8f",
+        "method": "GET"
+      },
+      {
+        "id": "61ae49ae-6e9a-491d-be16-a13e8162fee8",
+        "method": "GET"
+      },
+      {
+        "id": "39a8f02b-dfd3-41a0-a025-3c086b9be563",
+        "method": "GET"
+      },
+      {
+        "id": "6d6ad366-d0f6-4c31-88a9-fab35769e564",
+        "method": "GET"
+      },
+      {
+        "id": "c22c6e90-8184-4f4f-87f6-c38af11ba972",
+        "method": "GET"
+      },
+      {
+        "id": "98dddf11-0511-4568-a28d-6da24da90e3a",
+        "method": "GET"
+      },
+      {
+        "id": "0eb7777f-b767-4f75-8aba-89264cd350a1",
+        "method": "GET"
+      },
+      {
+        "id": "540185c7-2c3d-4066-afc2-a9ceab218641",
+        "method": "GET"
+      }
+    ]
+  }
+}
