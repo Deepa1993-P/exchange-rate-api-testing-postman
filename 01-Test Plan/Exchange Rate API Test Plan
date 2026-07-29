@@ -1,0 +1,162 @@
+Test Plan – Exchange Rate API Testing Using Postman
+Project Title:
+Exchange Rate API Automation Testing using Postman
+1. Document Information
+Field	Details
+Project Name	Exchange Rate API Automation Testing using Postman
+Testing Type	API Functional Testing
+Tool	Postman
+API Module	Banking Forex Exchange API
+Prepared By	Deepa Girish Patil
+Version	1.0
+
+2. Objective
+The objective of this project is to validate the functionality, reliability, accuracy, and performance of the Exchange Rate API using Postman. The testing ensures that all endpoints return correct responses for valid requests, appropriate error messages for invalid requests, and accurate exchange rate calculations.
+3. Scope
+The following Exchange Rate API functionalities are covered:
+•	Fetch Latest Exchange Rates
+•	Change Base Currency
+•	Filter Target Currency
+•	Historical Exchange Rate
+•	Exchange Rate Over a Period
+•	Exchange Rate for Date Range
+•	Time Series (Daily)
+•	Time Series Grouped by Month
+•	Time Series Grouped by Week
+•	Provider-wise Exchange Rates
+•	Attribution Information
+•	Export Exchange Rates as CSV
+•	Single Currency Pair Exchange Rate
+•	Available Currencies
+•	Legacy Currencies with Scope
+•	Currency Coverage
+•	Data Sources
+•	Multiple Currency Conversion
+•	Latest Rate → Convert Amount
+4. Test Objectives
+The testing aims to verify:
+•	API availability
+•	Correct HTTP status codes
+•	Response schema validation
+•	Data accuracy
+•	Currency conversion calculations
+•	Historical data retrieval
+•	CSV export functionality
+•	Error handling
+•	Data consistency
+5. Test Environment
+Item	Details
+API Environment	QA Environment
+Tool	Postman
+Execution	Manual 
+Format	JSON & CSV
+6. Entry Criteria
+•	API Documentation available
+•	Endpoints accessible
+•	Internet connectivity available
+•	Postman Environment configured
+7. Exit Criteria
+Testing is complete when:
+•	All planned test cases are executed
+•	No Critical or High Severity defects remain
+•	API responses are validated
+•	Test report is generated
+8. Test Deliverables
+•	Test Plan
+•	Test Scenarios
+•	Test Cases
+•	Postman Collection
+•	Environment File
+•	Defect Report
+•	Execution Report
+9. Test Scenarios 
+Module 1 – Latest Exchange Rates
+TC ID	Test Scenario	Expected Result
+TC01	Fetch latest exchange rate	Status 200
+TC02	Verify array is not empty	Response should not be empty
+TC03	Verify required fields exist
+(base, quote, rate)	Exists
+
+Module 2 – Base Currency
+TC ID	Test Scenario	Expected Result
+TC04	Change base currency to USD	Success
+TC05	Verify the JSON Schema	Schema is Valid
+TC06	Change base currency to INR	Success
+TC07	Invalid base currency	422 Unprocessable Entity
+TC08	Empty base currency	422 Unprocessable Entity
+
+Module 3 – Filter Target Currency
+TC ID	Test Scenario	Expected Result
+TC09	Filter only INR	INR returned
+TC10	Filter multiple currencies	Multiple currencies returned
+TC11	Invalid quotes	Error
+TC12	Empty quotes	Empty response
+
+Module 4 – Historical Exchange Rate
+TC ID	Test Scenario	Expected Result
+TC13	Valid historical date	Correct rate returned
+TC14	Future date	Empty response
+TC15	Invalid date format	Invalid date format (422)
+TC16	Leap year date	Success
+TC17	Non-Leap year date	In valid date (422)
+TC18	Very old date	Historical rate returned
+
+Module 5 – Exchange Rate Over Period
+TC ID	Test Scenario	Expected Result
+TC19	Valid start/end dates	200 OK with rates
+TC20	Fetch rates over a period
+(up to the specified end date from start of the year)	No future dates returned
+TC21	Same start and end date	Single-day result
+TC22	Missing start date	400 not found
+TC23	Missing end date	200 OK with rates from start date to today
+TC24	Start date after end date	400 not found
+
+Module 6 – Time Series
+TC ID	Test Scenario	Expected Result
+TC25	Daily time series	Daily Data returned
+TC26	Monthly grouped data	Monthly records returned
+TC27	Weekly grouped data	Weekly records returned
+TC28	Invalid group parameter	Invalid group(422)
+TC29	Empty group parameter	Invalid group(422)
+
+Module 7 – Provider & Attribution
+TC ID	Test Scenario	Expected Result
+TC30	Get Specific Provider	Specific Provider returned 
+TC31	Invalid provider	Error
+TC32	Expand provider attribution	Providers are expanded
+TC33	Verify attribution format	Valid
+
+Module 8 – CSV Export
+TC ID	Test Scenario	Expected Result
+TC34	Rates  as CSV. Append	Response is CSV
+TC35	Verify CSV Content-Type	text/csv
+TC36	Verify CSV columns	Correct headers
+
+Module 9 – Currency Information
+TC ID	Test Scenario	Expected Result
+TC37	Available currencies	Currency list with other information like name, code etc.. 
+TC38	Legacy currencies with scope	Legacy list with correct scope
+TC39	Coverage for a single currency	Coverage returned with provider list
+TC40	Data sources	Source list returned
+
+Module 11 – Currency Conversion
+TC ID	Test Scenario	Expected Result
+TC41	Rate for a single currency pair	Accurate rate returned
+TC42	Multiple currency conversion	Accurate conversions
+TC43	Latest rate → Convert amount	Correct converted amount
+
+10.Risks and Mitigation
+Risk	Mitigation
+Network issues	Re-run tests after connectivity is restored
+API downtime	Monitor service status and retry later
+
+11. Acceptance Criteria
+1.	The Exchange Rate API Postman project will be considered successful when:
+o	All test cases are executed successfully.
+o	All endpoints return the expected HTTP status codes.
+o	Response payloads conform to the documented JSON or CSV schema.
+o	Currency conversion results are accurate based on the returned exchange rates.
+o	Historical, latest, period-based, and time-series endpoints return complete and accurate data.
+o	Invalid inputs produce appropriate validation messages and error codes.
+o	API response times remain within the agreed performance threshold (for example, under 2 seconds).
+
